@@ -35,6 +35,8 @@ sub request {
 			for my $attr (keys %{$trigger}) {
 				for (@{$trigger->{$attr}}) {
 					if ( my @matches = $request->$attr =~ m/$_/ ) {
+					    use Data::Printer;
+						warn "matches: ", p(@matches);
 						push @results, $self->handle_request_matches($plugin,$request,@matches);
 						return @results if $self->return_one && @results;
 					} else {

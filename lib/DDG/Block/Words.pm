@@ -1,6 +1,7 @@
 package DDG::Block::Words;
 # ABSTRACT: Block implementation to handle words based plugins
 
+							use Data::Printer;
 use Moo;
 use Carp;
 with qw( DDG::Block );

@@ -156,6 +156,8 @@ has triggers => (
 sub _build_triggers {
 	my ( $self ) = @_;
 	my @parts = @{$self->query_raw_parts};
+	use Data::Printer;
+	warn "parts: ", p(@parts);
 	return {} if not scalar @parts;
 	my $x = $parts[0] eq '' ? 2 : 0;
 	my %triggers;
@@ -164,6 +166,7 @@ sub _build_triggers {
 			$triggers{$_} = $self->generate_triggers($parts[$_]);
 		}
 	}
+	warn "triggers: ", p(%triggers);
 	return \%triggers;
 }
 

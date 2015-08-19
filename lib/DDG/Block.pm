@@ -316,7 +316,10 @@ sub handle_request_matches {
 		}
 	}
 	push @{$request->seen_plugins}, $plugin_class;
+	use Data::Printer;
+	warn "args: ", p(@args);
 	my @results = $plugin->handle_request_matches($request, @args);
+	warn "results: ", p(@results);
 	$self->trace("Got",scalar @results,"results");
 	return @results;
 }
