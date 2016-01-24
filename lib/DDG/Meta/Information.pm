@@ -100,6 +100,7 @@ sub apply_keywords {
 	my $code_url;
 	my $status;
 	my $url_regex = url_match_regex();
+	my $dev_essential;
 
 	my $stash = Package::Stash->new($target);
 
@@ -259,6 +260,18 @@ This function indicate the status of the plugin which is used to show it on the 
 	});
 
 
+=keyword dev_essential
+
+This function indicates that the plugin is essential for IA developers and failure to load
+it may impact their work. This function must be called early in the IA before code that
+could fail.
+
+=cut
+
+	$stash->add_symbol('&dev_essential', sub {
+		$dev_essential = shift if @_;
+	});
+
 =keyword get_category
 
 This function returns the plugin's category
@@ -277,6 +290,16 @@ This function returns the plugin's topics in an array
 
 	$stash->add_symbol('&get_topics', sub {
 		return \@topics;
+	});
+
+=keyword is_dev_essential
+
+This function returns if the plugin is essential for IA developers
+
+=cut
+
+	$stash->add_symbol('&is_dev_essential', sub {
+		return $dev_essential;
 	});
 
 =keyword get_meta_information
